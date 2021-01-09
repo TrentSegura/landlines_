@@ -6,7 +6,6 @@ import Pins from './components/Pins'
 import Home from './components/Home'
 
 
-
 export class App extends Component {
   constructor(props) {
     super(props)
