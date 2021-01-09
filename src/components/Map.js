@@ -11,21 +11,21 @@ export class Map extends Component {
         const app = this.props.app
         mapbox.accessToken = 'pk.eyJ1IjoibTEyLXRyZW50IiwiYSI6ImNrNDNuejljbjA0NzMzZW15eGk4OWMwdTEifQ.8rs6af8i7F8oeHDpbD_zQw';
        
-        // var bounds = [
-        //     [-110.113384, 35.747004], // Southwest coordinates
-        //     [-102.113384, 39.747004] // Northeast coordinates
-        // ]
+        var bounds = [
+            [-110.113384, 35.747004], // Southwest coordinates
+            [-102.113384, 39.747004] // Northeast coordinates
+        ]
 
         var map = new mapbox.Map({
             container: 'map',
             style:  "mapbox://styles/m12-trent/ckg9xlrw62gxc19lc9hbaylmf",
             center: [app.state.longitude, app.state.latitude],
             zoom: app.state.zoom,
-            minZoom: 1,
+            minZoom: 8,
             maxZoom: 13,
             maxPitch: 60,
             attributionControl: false,
-            // maxBounds: bounds
+            maxBounds: bounds
             });
         
         map.scrollZoom.disable();
@@ -33,32 +33,7 @@ export class Map extends Component {
         const nav = new mapbox.NavigationControl();
         map.addControl(nav, 'bottom-right');
 
-        this.props.app.setState({
-            map: map
-        });
-        
         map.on('load', function () {
-
-            // map.addSource('mapbox-dem', {
-            //     'type': 'raster-dem',
-            //     'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
-            //     'tileSize': 512,
-            //     'maxzoom': 14
-            //     });
-            //     // add the DEM source as a terrain layer with exaggerated height
-            // map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
-                    
-            //     // add a sky layer that will show when the map is highly pitched
-            // map.addLayer({
-            //     'id': 'sky',
-            //     'type': 'sky',
-            //     'paint': {
-            //     'sky-type': 'atmosphere',
-            //     'sky-atmosphere-sun': [0.0, 0.0],
-            //     'sky-atmosphere-sun-intensity': 15
-            //     }
-            //     });
-
             map.addSource('landlines', {
                 'type': 'geojson',
                 'data': {
@@ -114,7 +89,10 @@ export class Map extends Component {
                  }
             });
         })
-       
+
+        this.props.app.setState({
+            map: map
+        });
     }
     
     
