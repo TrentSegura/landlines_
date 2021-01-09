@@ -4,7 +4,6 @@ import Map from './components/Map'
 import Marker from './components/Marker'
 import Pins from './components/Pins'
 import Home from './components/Home'
-import Lines from './components/Lines'
 
 
 export class App extends Component {
@@ -24,7 +23,6 @@ export class App extends Component {
       <div className="App">
         <Map app={this} />
         <Pins app={this}/>
-        {/* <Lines app={this} /> */}
         <Marker app={this}/>
         <Home app={this} />
         <div className="Mapoverlay">
